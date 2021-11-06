@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 public class HelloController {
 
     @GetMapping("/hello")
-    public String hello(HttpServletRequest request) {
-    request.setAttribute("nome","Mundo");
+    public String hello(Model model) {
+    model.addAttribute("nome","Mundo");
         return "hello";
     }
 }
