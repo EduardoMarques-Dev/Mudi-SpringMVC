@@ -1,14 +1,13 @@
 package com.emarques.springmvc.mudi.model;
 
-import net.bytebuddy.dynamic.loading.InjectionClassLoader;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.math.BigDecimal;
-import java.time.LocalDate;
 
 @Entity
 public class Pedido {
@@ -18,7 +17,9 @@ public class Pedido {
     private String nomeProduto;
     private BigDecimal valorNegociado;
     private LocalDate dataEntrega;
+    @Column(length=510)
     private String urlProduto;
+    @Column(length=510)
     private String urlImagem;
     private String descricao;
 
