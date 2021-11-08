@@ -2,13 +2,15 @@ package com.emarques.springmvc.mudi.dto;
 
 import com.emarques.springmvc.mudi.model.Pedido;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
+import javax.validation.constraints.NotBlank;
 
 public class RequisicaoNovoPedido {
 
+    @NotBlank
     private String nomeProduto;
+    @NotBlank
     private String urlProduto;
+    @NotBlank
     private String urlImagem;
     private String descricao;
 
