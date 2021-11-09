@@ -10,6 +10,7 @@
 		
     	<div class="card mt-3">
         <form th:object="${requisicaoNovoPedido}" class="card-body needs-validation" action="/pedido/novo" method="POST">
+            
             <div class="form-group mb-3">
                 <label for="nomeProduto">Produto</label>
                 <input th:field="*{nomeProduto}" th:errorclass="is-invalid" class="form-control" placeholder="nome do produto"/>
@@ -18,6 +19,7 @@
                 </div>
                 <small>Informe qual o nome do produto.</small>
             </div>
+            
             <div class="form-group mb-3">
                 <label for="urlProduto">URL</label>
                 <input th:field="*{urlProduto}" th:errorclass="is-invalid" class="form-control" placeholder="url do produto"/>
@@ -26,6 +28,7 @@
                 </div>
                 <small>Procure em um site o produto que você deseja e cole a url da página aqui.</small>
             </div>
+            
             <div class="form-group mb-3">
                 <label for="urlImagem">Imagem</label>
                 <input th:field="*{urlImagem}" th:errorclass="is-invalid" class="form-control" placeholder="url da imagem"/>
@@ -33,16 +36,15 @@
                 	O campo url da imagem é obrigatório!
                 </div>
                 <small>Copie a url de uma boa imagem do produto e cole aqui para ajudar os compradores.</small>
-
             </div>
+            
             <div class="form-group mb-3">
                 <label for="descricao">Descrição</label>
-                <textarea th:field="*{descricao}" class="form-control"
-                          placeholder="Adicione detalhes importantes para ajudar o comprador"></textarea>
+                <textarea th:field="*{descricao}" class="form-control" placeholder="Adicione detalhes importantes para ajudar o comprador"></textarea>
             </div>
-            
-            
+                
             <button class="btn btn-primary" type="submit">Cadastrar</button>
+            
         </form>
     </div>
 

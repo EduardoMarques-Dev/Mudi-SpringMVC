@@ -1,6 +1,7 @@
 package com.emarques.springmvc.mudi.dto;
 
 import com.emarques.springmvc.mudi.model.Pedido;
+import com.emarques.springmvc.mudi.model.StatusPedido;
 
 import javax.validation.constraints.NotBlank;
 
@@ -62,6 +63,7 @@ public class RequisicaoNovoPedido {
         pedido.setUrlProduto(getUrlProduto());
         pedido.setUrlImagem(getUrlImagem());
         pedido.setDescricao(descricao);
+        pedido.setStatus(StatusPedido.AGUARDANDO);
         return pedido;
     }
 }

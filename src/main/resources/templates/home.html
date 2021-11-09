@@ -11,9 +11,10 @@
 		<nav
 			class="navbar navbar-expand navbar-light bg-light d-flex justify-content-between mb-3">
 			<div class="navbar-nav">
-				<a class="nav-link active" href="">Todos</a> <a class="nav-link"
-					href="">Aguardando</a> <a class="nav-link" href="">Aprovado</a> <a
-					class="nav-link" href="">Entregue</a>
+				<a class="nav-link active" href="">Todos</a> 
+				<a class="nav-link" href="">Aguardando</a> 
+				<a class="nav-link" href="">Aprovado</a> 
+				<a class="nav-link" href="">Entregue</a>
 			</div>
 			<a href="/pedido/formulario">
 				<button class="btn btn-outline-secondary">Novo</button>
@@ -21,13 +22,20 @@
 		</nav>
 
 		<div class="card mb-3" th:each="pedido : ${pedidos}">
-			<div class="card-header" th:text="${pedido.getNomeProduto()}">
-				Nome do produto</div>
+			
+			<th:block th:switch="${pedido.status.name()}">
+				<div th:case="'AGUARDANDO'" class="card-header alert-warning" th:text="${pedido.getNomeProduto()}"> Nome do produto </div>
+				<div th:case="'APROVADO'" class="card-header alert-success" th:text="${pedido.getNomeProduto()}"> Nome do produto </div>
+				<div th:case="'ENTREGUE'" class="card-header alert-dark" th:text="${pedido.getNomeProduto()}"> Nome do produto </div>
+			</th:block>
+			
 			<div class="card-body">
+			
 				<div class="row">
+					
 					<div class="col-12 col-sm-8">
 
-						<div class="row">
+						<div class="row mb-3">
 							<div class="col-12 col-md-5">
 								Valor: <span th:text="${pedido.getValorNegociado()}">200,99</span>
 							</div>
@@ -36,27 +44,31 @@
 							</div>
 						</div>
 
-						<div class="form-label">Produto</div>
+
+						<div class="form-label mb-1">Produto</div>
 						<div>
-							<input class="form-control" th:value="${pedido.getUrlProduto()}"
+							<input class="form-control mb-3" th:value="${pedido.getUrlProduto()}"
 								value="url do produto">
 						</div>
 
-						<div class="form-label">Descrição</div>
+
+						<div class="form-label mb-1">DescriÃ§Ã£o</div>
 						<div>
-							<textarea class="form-control" th:text="${pedido.getDescricao()}">descrição do pedido</textarea>
+							<textarea class="form-control mb-3" th:text="${pedido.getDescricao()}">descriÃ§Ã£o do pedido</textarea>
 						</div>
 
 					</div>
+					
 					<div class="col">
 						<div>
 							<img class="img-thumbnail" th:src="${pedido.getUrlImagem()}" />
 						</div>
 					</div>
+					
+					
 				</div>
 			</div>
 		</div>
 	</div>
-
 </body>
 </html>
