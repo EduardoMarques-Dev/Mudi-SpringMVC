@@ -37,10 +37,10 @@
 
 						<div class="row mb-3">
 							<div class="col-12 col-md-5">
-								Valor: <span th:text="${pedido.getValorNegociado()}">200,99</span>
+								Valor: <span th:if="${pedido.valorNegociado} != null" th:text="${'R$ ' + #numbers.formatDecimal(pedido.getValorNegociado(),3,'POINT',2,'COMMA')}">R$ 10,00</span>
 							</div>
 							<div class="col">
-								Data da entrega: <span th:text="${pedido.getDataEntrega()}">10/02/2020</span>
+								Data da entrega: <span th:text="${#temporals.format(pedido.getDataEntrega(),'dd/MM/yyyy')}">01/01/2000</span>
 							</div>
 						</div>
 
