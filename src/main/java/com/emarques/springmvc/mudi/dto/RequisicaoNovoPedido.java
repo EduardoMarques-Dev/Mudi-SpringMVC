@@ -1,9 +1,9 @@
 package com.emarques.springmvc.mudi.dto;
 
+import javax.validation.constraints.NotBlank;
+
 import com.emarques.springmvc.mudi.model.Pedido;
 import com.emarques.springmvc.mudi.model.StatusPedido;
-
-import javax.validation.constraints.NotBlank;
 
 public class RequisicaoNovoPedido {
 

@@ -7,9 +7,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Pedido {
@@ -25,23 +27,22 @@ public class Pedido {
     private String urlImagem;
     private String descricao;
     
-    @Enumerated(EnumType.STRING)//
+    @Enumerated(EnumType.STRING)
     private StatusPedido status;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
 
     public Pedido() {
     }
+     
 
-    public Pedido(Long id, String nomeProduto, BigDecimal valorNegociado, LocalDate dataEntrega, String urlProduto,
-			String urlImagem, String descricao, StatusPedido status) {
-		super();
-		this.id = id;
-		this.nomeProduto = nomeProduto;
-		this.valorNegociado = valorNegociado;
-		this.dataEntrega = dataEntrega;
-		this.urlProduto = urlProduto;
-		this.urlImagem = urlImagem;
-		this.descricao = descricao;
-		this.status = status;
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public StatusPedido getStatus() {
