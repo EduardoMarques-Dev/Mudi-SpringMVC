@@ -14,6 +14,29 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+//// AULA 01.04: Implementando o Login
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//        http
+//            .authorizeRequests()
+//                .anyRequest()
+//                .authenticated()
+//            .and()
+//                .httpBasic();
+//    }
+//
+//    @Override
+//    @Bean
+//    public UserDetailsService userDetailsService(){
+//        UserDetails user =
+//                User.withDefaultPasswordEncoder()
+//                        .username("joao")
+//                        .password("joao")
+//                        .roles("ADM")
+//                        .build();
+//        return new InMemoryUserDetailsManager(user);
+//    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -21,16 +44,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest()
                 .authenticated()
             .and()
-                .httpBasic();
+            .formLogin(form -> form
+                .loginPage("/login")
+                .permitAll()
+            );
     }
-
     @Override
     @Bean
     public UserDetailsService userDetailsService(){
         UserDetails user =
                 User.withDefaultPasswordEncoder()
-                        .username("joao")
-                        .password("joao")
+                        .username("maria")
+                        .password("maria")
                         .roles("ADM")
                         .build();
         return new InMemoryUserDetailsManager(user);
