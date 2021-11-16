@@ -25,11 +25,10 @@ public class HomeController {
 
     PedidoRepository pedidoRepository;
 
-    @GetMapping
-    public String home(Model model, Principal principal) {
-        List<Pedido> pedidos = pedidoRepository.findAllByUsuario(principal.getName());
+    @GetMapping("")
+    public String home(Model model) {
+        List<Pedido> pedidos = pedidoRepository.findAll();
         model.addAttribute("pedidos", pedidos);
-        model.addAttribute("usuario", principal.getName());
         return "home";
     }
 
@@ -45,4 +44,6 @@ public class HomeController {
     public String onError() {
         return "redirect:/home";
     }
+
+
 }
