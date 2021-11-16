@@ -1,11 +1,11 @@
 package com.emarques.springmvc.mudi.controller;
 
-import javax.validation.Valid;
-
+import com.emarques.springmvc.mudi.dto.RequisicaoNovoPedido;
+import com.emarques.springmvc.mudi.model.Pedido;
 import com.emarques.springmvc.mudi.model.User;
+import com.emarques.springmvc.mudi.repository.PedidoRepository;
 import com.emarques.springmvc.mudi.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -13,16 +13,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.emarques.springmvc.mudi.dto.RequisicaoNovoPedido;
-import com.emarques.springmvc.mudi.model.Pedido;
-import com.emarques.springmvc.mudi.repository.PedidoRepository;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/pedido")
 @AllArgsConstructor
 public class PedidoController {
 
-    private PedidoRepository repository;
+    private PedidoRepository pedidoRepository;
     private UserRepository userRepository;
 
     @GetMapping("/formulario")
@@ -43,7 +41,7 @@ public class PedidoController {
         Pedido pedido = requisicao.toPedido();
         pedido.setUser(user);
 
-        repository.save(pedido);
+        pedidoRepository.save(pedido);
         return "redirect:/home";
     }
 }

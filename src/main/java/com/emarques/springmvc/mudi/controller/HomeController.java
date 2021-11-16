@@ -24,30 +24,25 @@ import com.emarques.springmvc.mudi.repository.PedidoRepository;
 public class HomeController {
 
     PedidoRepository pedidoRepository;
-    UserRepository userRepository;
 
     @GetMapping
     public String home(Model model, Principal principal) {
         List<Pedido> pedidos = pedidoRepository.findAllByUsuario(principal.getName());
-        User usuario = userRepository.findByUsername(principal.getName());
         model.addAttribute("pedidos", pedidos);
-        model.addAttribute("usuario", usuario.getUsername());
+        model.addAttribute("usuario", principal.getName());
         return "home";
     }
-    
+
     @GetMapping("/{status}")
     public String porStatus(@PathVariable String status, Model model) {
-    	List<Pedido> pedidos = pedidoRepository.findAllByStatus(StatusPedido.valueOf(status.toUpperCase()));
-    	model.addAttribute("pedidos",pedidos);
-    	model.addAttribute("status", status);
-    	return "home";
+        List<Pedido> pedidos = pedidoRepository.findAllByStatus(StatusPedido.valueOf(status.toUpperCase()));
+        model.addAttribute("pedidos",pedidos);
+        model.addAttribute("status", status);
+        return "home";
     }
-    
+
     @ExceptionHandler(IllegalArgumentException.class)
     public String onError() {
-    	return "redirect:/home";
+        return "redirect:/home";
     }
-    //
-    
-    
 }
