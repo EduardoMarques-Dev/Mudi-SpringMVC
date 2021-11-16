@@ -6,11 +6,10 @@
 
 	<div class="container">
 
-		<span class="badge bg-dark" th:text="${usuario}">Usuário Badget</span></h6>
 		<div th:replace="~{base :: titulo('Meus Pedidos')}"></div>
 
 		<nav
-			class="navbar navbar-expand navbar-light bg-light d-flex justify-content-between mb-3">
+			class="navbar navbar-expand navbar-light bg-light d-flex justify-content-between">
 			<div class="navbar-nav">
 				<a th:classappend="${status} == null ? 'active'" class="nav-link" th:href="@{/usuario/pedido}">Todos</a>
 				<a th:classappend="${status} == 'aguardando' ? 'active'" class="nav-link" th:href="@{/usuario/pedido/aguardando}">Aguardando</a>
@@ -21,6 +20,7 @@
 				<button class="btn btn-outline-secondary">Novo</button>
 			</a>
 		</nav>
+		<span class="badge bg-dark mb-3" th:text="${usuario}">Usuário Badget</span></h6>
 
 		<div class="card mb-3" th:each="pedido : ${pedidos}">
 			
