@@ -2,7 +2,11 @@ package com.emarques.springmvc.mudi.controller;
 
 import javax.validation.Valid;
 
+import com.emarques.springmvc.mudi.model.User;
+import com.emarques.springmvc.mudi.repository.UserRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +19,11 @@ import com.emarques.springmvc.mudi.repository.PedidoRepository;
 
 @Controller
 @RequestMapping("/pedido")
+@AllArgsConstructor
 public class PedidoController {
 
-    @Autowired
     private PedidoRepository repository;
+    private UserRepository userRepository;
 
     @GetMapping("/formulario")
     public String formulario(RequisicaoNovoPedido requisicao) {
@@ -31,9 +36,14 @@ public class PedidoController {
         if(result.hasErrors()){
             return "pedido/formulario";
         }
-        Pedido pedido = requisicao.toPedido();
-        repository.save(pedido);
 
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userRepository.findByUsername(username);
+
+        Pedido pedido = requisicao.toPedido();
+        pedido.setUser(user);
+
+        repository.save(pedido);
         return "redirect:/home";
     }
 }
