@@ -3,6 +3,9 @@ package com.emarques.springmvc.mudi.controller;
 import java.security.Principal;
 import java.util.List;
 
+import com.emarques.springmvc.mudi.model.User;
+import com.emarques.springmvc.mudi.repository.UserRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,15 +20,18 @@ import com.emarques.springmvc.mudi.repository.PedidoRepository;
 
 @Controller
 @RequestMapping("/home")
+@AllArgsConstructor
 public class HomeController {
 
-    @Autowired
     PedidoRepository pedidoRepository;
+    UserRepository userRepository;
 
     @GetMapping
     public String home(Model model, Principal principal) {
         List<Pedido> pedidos = pedidoRepository.findAllByUsuario(principal.getName());
+        User usuario = userRepository.findByUsername(principal.getName());
         model.addAttribute("pedidos", pedidos);
+        model.addAttribute("usuario", usuario.getUsername());
         return "home";
     }
     
