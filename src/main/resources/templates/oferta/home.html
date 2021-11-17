@@ -1,0 +1,47 @@
+<html>
+<head th:replace="~{base :: head('Últimos Pedidos')}"></head>
+<body>
+
+<div th:replace="~{base :: logo}"></div>
+
+<div class="container">
+
+	<div th:replace="~{base :: titulo('Últimos Pedidos')}"></div>
+
+	<div class="card mb-3" th:each="pedido : ${pedidos}">
+		<div class="card-header alert-warning" th:text="${pedido.getNomeProduto()}"> Nome do produto </div>
+		<div class="card-body">
+			<div class="row">
+				<div class="col-12 col-sm-8">
+					<div class="row mb-3">
+						<div class="col-12 col-md-5">
+							Valor: <span th:if="${pedido.valorNegociado} != null" th:text="${'R$ ' + #numbers.formatDecimal(pedido.getValorNegociado(),3,'POINT',2,'COMMA')}">R$ 10,00</span>
+						</div>
+						<div class="col">
+							Data da entrega: <span th:text="${#temporals.format(pedido.getDataEntrega(),'dd/MM/yyyy')}">01/01/2000</span>
+						</div>
+					</div>
+
+					<div class="form-label mb-1">Produto</div>
+					<div>
+						<input class="form-control mb-3" th:value="${pedido.getUrlProduto()}"
+							   value="url do produto">
+					</div>
+
+					<div class="form-label mb-1">Descrição</div>
+					<div>
+						<textarea class="form-control mb-3" th:text="${pedido.getDescricao()}">descrição do pedido</textarea>
+					</div>
+				</div>
+
+				<div class="col">
+					<div>
+						<img class="img-thumbnail" th:src="${pedido.getUrlImagem()}" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

@@ -27,7 +27,7 @@ public class HomeController {
 
     PedidoRepository pedidoRepository;
 
-    @GetMapping("")
+    @GetMapping
     public String home(Model model) {
 
         Sort sort = Sort.by("dataEntrega").descending();
