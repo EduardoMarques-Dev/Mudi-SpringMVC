@@ -1,47 +1,53 @@
 <html>
 <head th:replace="~{base :: head('Últimos Pedidos')}"></head>
-<body>
+<body onload="onLoad()">
 
 <div th:replace="~{base :: logo}"></div>
 
-<div class="container">
+<div class="container" id="ofertas">
 
 	<div th:replace="~{base :: titulo('Últimos Pedidos')}"></div>
 
-	<div class="card mb-3" th:each="pedido : ${pedidos}">
-		<div class="card-header alert-warning" th:text="${pedido.getNomeProduto()}"> Nome do produto </div>
+	<div class="card mb-3" v-for="pedido in pedidos">
+		<div class="card-header alert-warning">{{pedido.nomeProduto}}</div>
 		<div class="card-body">
 			<div class="row">
 				<div class="col-12 col-sm-8">
 					<div class="row mb-3">
 						<div class="col-12 col-md-5">
-							Valor: <span th:if="${pedido.valorNegociado} != null" th:text="${'R$ ' + #numbers.formatDecimal(pedido.getValorNegociado(),3,'POINT',2,'COMMA')}">R$ 10,00</span>
+							Valor: <input/>
 						</div>
 						<div class="col">
-							Data da entrega: <span th:text="${#temporals.format(pedido.getDataEntrega(),'dd/MM/yyyy')}">01/01/2000</span>
+							Data da entrega: <input/>
 						</div>
 					</div>
 
 					<div class="form-label mb-1">Produto</div>
-					<div>
-						<input class="form-control mb-3" th:value="${pedido.getUrlProduto()}"
-							   value="url do produto">
-					</div>
+					<div><a v-bind:href="pedido.urlProduto">{{pedido.nomeProduto}}</a></div>
 
 					<div class="form-label mb-1">Descrição</div>
-					<div>
-						<textarea class="form-control mb-3" th:text="${pedido.getDescricao()}">descrição do pedido</textarea>
-					</div>
+					<div><textarea class="form-control mb-3">{{pedido.descricao}}</textarea></div>
 				</div>
 
 				<div class="col">
 					<div>
-						<img class="img-thumbnail" th:src="${pedido.getUrlImagem()}" />
+						<img class="img-thumbnail" v-bind:src="pedido.urlImagem" />
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+<script>
+	function onLoad(){
+		var app = new Vue({
+		el: '#ofertas',
+		data: {
+			pedidos : []
+		  }
+		})
+	}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 </body>
 </html>
