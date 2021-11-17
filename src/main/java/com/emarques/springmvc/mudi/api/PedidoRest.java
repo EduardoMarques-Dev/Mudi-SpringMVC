@@ -24,8 +24,10 @@ public class PedidoRest {
 
         Sort sort = Sort.by("id").descending();
         PageRequest paginacao = PageRequest.of(0, 10, sort);
+        System.out.println( pedidoRepository.findAllByStatus(StatusPedido.AGUARDANDO,paginacao).toString());
 
-        return pedidoRepository.findAllByStatus(StatusPedido.AGUARDANDO,paginacao);
+        // return pedidoRepository.findAllByStatus(StatusPedido.AGUARDANDO,paginacao);
+        return pedidoRepository.findAll();
     }
 
 }

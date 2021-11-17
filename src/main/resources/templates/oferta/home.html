@@ -6,7 +6,7 @@
 
 <div class="container" id="ofertas">
 
-	<div th:replace="~{base :: titulo('Últimos Pedidos')}"></div>
+	<div th:replace="~{base :: titulo('Faça sua Oferta')}"></div>
 
 	<div class="card mb-3" v-for="pedido in pedidos">
 		<div class="card-header alert-warning">{{pedido.nomeProduto}}</div>
@@ -41,13 +41,18 @@
 <script>
 	function onLoad(){
 		var app = new Vue({
-		el: '#ofertas',
-		data: {
-			pedidos : []
-		  }
+			el: '#ofertas',
+			data:{
+				pedidos : []},
+			mounted () {
+				axios
+				  .get('http://localhost:8888/api/pedido/aguardando')
+				  .then(response => (this.pedidos = response.data))
+			}
 		})
 	}
 </script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </body>
 </html>
